@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="org.springframework.debug.populateBean"></context:component-scan>
+
+	<bean id="myAutowiredAnnotationBeanPostProcessor" class="org.springframework.debug.populateBean.myAnnotation.MyAutowiredAnnotationBeanPostProcessor"></bean>
+
+	<bean id="student" class="org.springframework.debug.populateBean.Student" autowire="byName"></bean>
+	<bean id="student1" class="org.springframework.debug.populateBean.Student" autowire="byType"></bean>
+
+	<bean id="address" class="org.springframework.debug.populateBean.Address">
+		<property name="province" value="浙江省"></property>
+		<property name="city" value="杭州市"></property>
+		<property name="country" value="西湖区"></property>
+	</bean>
+</beans>

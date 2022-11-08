@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="calculate" class="org.springframework.debug.aop.Calculate"/>
+	<bean id="logger" class="org.springframework.debug.aop.Logger"/>
+
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="logger">
+			<aop:pointcut id="myPointCut" expression="execution(* org.springframework.debug.aop.Calculate.*(..))"/>
+			<aop:before method="beforeMethod" pointcut-ref="myPointCut"/>
+			<aop:after method="after" pointcut-ref="myPointCut"/>
+			<aop:around method="around" pointcut-ref="myPointCut" arg-names="proceedingJoinPoint"/>
+			<aop:after-returning method="afterReturning" pointcut-ref="myPointCut"/>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="myPointCut" throwing="ex"/>
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>
