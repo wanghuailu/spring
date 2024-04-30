@@ -29,6 +29,7 @@ public class PersonService implements ApplicationContextAware {
 	public void update() throws Exception {
 		personDao.update(1, "张三5");
 
+// 		这里会导致死锁， update() 方法有事务, updateForNew() 又开一个新事务，更新的都是id=1，两个更新导致死锁
 		PersonService personService = applicationContext.getBean(PersonService.class);
 		personService.updateForNew();
 
